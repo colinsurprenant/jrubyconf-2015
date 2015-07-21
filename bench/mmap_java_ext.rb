@@ -1,9 +1,10 @@
-require "bundler/setup"
-require "benchmark"
-require "jruby-mmap"
-require_relative "buffers"
+$: << File.expand_path("../../", __FILE__)
 
-path = File.join(JRubyConf2015::OUT_PATH, "mmap_file.dat")
+require "bundler/setup"
+require "jruby-mmap"
+require "lib/bench"
+
+path = File.join(JRubyConf2015::OUT_PATH, "mmap.dat")
 File.delete(path) rescue nil
 out = Mmap::ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
 

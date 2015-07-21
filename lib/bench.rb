@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require "benchmark"
+
 module JRubyConf2015
   extend self
 
@@ -21,7 +23,7 @@ module JRubyConf2015
   WRITE_SIZE = 2 * 1000 * 1024 * 1024
   WRITE_SIZE_MB = 2 * 1000
   REPEAT = 4
-  OUT_PATH = File.expand_path("../out", __FILE__)
+  OUT_PATH = File.expand_path("../../out", __FILE__)
 
   Dir.mkdir(OUT_PATH) unless File.directory?(OUT_PATH)
 

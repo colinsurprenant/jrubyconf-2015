@@ -1,9 +1,10 @@
+$: << File.expand_path("../../", __FILE__)
+
 require "bundler/setup"
-require "benchmark"
-require_relative "buffers"
+require "lib/bench"
 
 # create file once before all tests
-path = File.join(JRubyConf2015::OUT_PATH, "ruby_file.dat")
+path = File.join(JRubyConf2015::OUT_PATH, "file.dat")
 File.delete(path) rescue nil
 out = File.new(path, "w+")
 

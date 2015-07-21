@@ -3,7 +3,7 @@ require "java"
 java_import "java.io.RandomAccessFile"
 java_import "java.nio.channels.FileChannel"
 
-module MmapPure
+module Mmap
   class ByteBuffer
     def initialize(path, size)
       @channel = RandomAccessFile.new(Java::JavaIo::File.new(path), "rw").get_channel

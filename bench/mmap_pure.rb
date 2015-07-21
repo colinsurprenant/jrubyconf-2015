@@ -1,11 +1,13 @@
+$: << File.expand_path("../../", __FILE__)
+
 require "bundler/setup"
 require "benchmark"
-require_relative "buffers"
-require_relative "mmap_pure"
+require "lib/bench"
+require "lib/mmap"
 
 path = File.join(JRubyConf2015::OUT_PATH, "mmap_file_pure.dat")
 File.delete(path) rescue nil
-out = MmapPure::ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
+out = Mmap::ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
 
 # hint OS for best effort to ensure that this buffer content is resident in physical memory
 out.load
