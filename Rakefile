@@ -6,6 +6,8 @@ rescue
   exit(1)
 end
 
+require_relative "lib/bench"
+
 task :setup do
   ant.mkdir :dir => "target/classes"
   ant.path :id => 'classpath' do
@@ -17,7 +19,7 @@ desc "compile Java classes"
 task :build => [:setup] do |t, args|
   ant.javac(
     :srcdir => "src/",
-    :destdir => "target/classes/",
+    :destdir => JRubyConf2015::CLASSES_DIR,
     :classpathref => "classpath",
     :debug => true,
     :includeantruntime => "no",

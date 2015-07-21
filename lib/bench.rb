@@ -24,6 +24,7 @@ module JRubyConf2015
   WRITE_SIZE_MB = 2 * 1000
   REPEAT = 4
   OUT_PATH = File.expand_path("../../out", __FILE__)
+  CLASSES_DIR = File.expand_path("../../target/classes", __FILE__)
 
   Dir.mkdir(OUT_PATH) unless File.directory?(OUT_PATH)
 
