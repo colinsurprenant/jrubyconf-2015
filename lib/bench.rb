@@ -30,7 +30,7 @@ module JRubyConf2015
 
 
   def bench(header, repeat = REPEAT, &block)
-
+    puts("=begin")
     # aggregate results for all defined buffer sizes
     results = BUFFER_SIZES.map do |buffer_kb_size|
 
@@ -51,15 +51,18 @@ module JRubyConf2015
       end
 
       # use "real" or wallclock time since we are benchmarking IO we need to account
-      # for the IO wait time which is not reprensented in user/system times whicb
+      # for the IO wait time which is not reprensented in user/system times which
       # are CPU only times
       [buffer_kb_size, b.first.real]
     end
 
     puts("\n#{header} rates")
-    results.each do |size, real|
-      rate = (repeat * WRITE_SIZE_MB) / real
-      puts("> #{size}KB rate #{"%.2f" % rate}MB/sec")
-    end
+    rates = results.map {|size, real| [size, (repeat * WRITE_SIZE_MB) / real]}
+    rates.each{|size, rate| puts("> #{size}KB rate #{"%.2f" % rate}MB/sec")}
+
+    puts("=end")
+
+    h = {:header => header, :results => rates.map(&:last)}
+    puts("#{h.to_s},")
   end
 end
