@@ -16,24 +16,6 @@ out = ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
 # hint OS for best effort to ensure that this buffer content is resident in physical memory
 out.load
 
-# JRubyConf2015.bench("MMap Java: explicit java-side unboxing") do |write_count, buffer|
-#   # seek to file start
-#   out.position(0)
-
-#   write_count.times.each do
-#     out.put_ruby_string(buffer)
-#   end
-# end
-
-# JRubyConf2015.bench("MMap Java: explicit ruby-side unboxing") do |write_count, buffer|
-#   # seek to file start
-#   out.position(0)
-
-#   write_count.times.each do
-#     out.put_bytes(buffer.to_java_bytes)
-#   end
-# end
-
 JRubyConf2015.bench("MMap Java: implicit unboxing default charset") do |write_count, buffer|
   # seek to file start
   out.position(0)
@@ -50,6 +32,24 @@ JRubyConf2015.bench("MMap Java: implicit unboxing ISO_8859_1") do |write_count, 
   write_count.times.each do
     # assume data is correctly encoded, use ISO_8859_1 to avoid any transcoding in bytes extraction
     out.put_bytes(buffer, StandardCharsets::ISO_8859_1)
+  end
+end
+
+JRubyConf2015.bench("MMap Java: explicit ruby unboxing") do |write_count, buffer|
+  # seek to file start
+  out.position(0)
+
+  write_count.times.each do
+    out.put_bytes(buffer.to_java_bytes)
+  end
+end
+
+JRubyConf2015.bench("MMap Java: explicit java unboxing") do |write_count, buffer|
+  # seek to file start
+  out.position(0)
+
+  write_count.times.each do
+    out.put_ruby_string(buffer)
   end
 end
 
