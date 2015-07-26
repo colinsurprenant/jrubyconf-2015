@@ -11,7 +11,7 @@ out = Mmap::ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
 # hint OS for best effort to ensure that this buffer content is resident in physical memory
 out.load
 
-JRubyConf2015.bench("MMap IO unsafe", 16) do |write_count, buffer|
+JRubyConf2015.bench("MMap Java Ext: unsafe", 16) do |write_count, buffer|
   # seek to file start
   out.position = 0
 
@@ -20,7 +20,7 @@ JRubyConf2015.bench("MMap IO unsafe", 16) do |write_count, buffer|
   end
 end
 
-JRubyConf2015.bench("MMap IO safe", 16) do |write_count, buffer|
+JRubyConf2015.bench("MMap Java Ext: safe", 16) do |write_count, buffer|
   # seek to file start
   out.position = 0
 

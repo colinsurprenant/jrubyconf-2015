@@ -13,7 +13,7 @@ out = File.new(path, "w+")
   out.write(JRubyConf2015::BUFFERS[16])
 end
 
-JRubyConf2015.bench("Ruby File IO") do |write_count, buffer|
+JRubyConf2015.bench("File Ruby") do |write_count, buffer|
   # seek to file start
   out.seek(0)
 

@@ -11,7 +11,7 @@ out = Mmap::ByteBuffer.new(path, JRubyConf2015::WRITE_SIZE)
 # hint OS for best effort to ensure that this buffer content is resident in physical memory
 out.load
 
-JRubyConf2015.bench("Pure MMap IO") do |write_count, buffer|
+JRubyConf2015.bench("MMap Ruby") do |write_count, buffer|
   # seek to file start
   out.position = 0
 
