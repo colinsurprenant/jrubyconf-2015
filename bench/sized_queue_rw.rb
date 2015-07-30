@@ -16,7 +16,8 @@ Thread.abort_on_exception = true
 ITEMS = 500_000
 END_ITEM = "END"
 PERSIST = true
-PAGE_SIZE = ITEMS * JRubyConf2015::BUFFERS[1].bytesize
+# PAGE_SIZE = ITEMS * JRubyConf2015::BUFFERS[1].bytesize
+PAGE_SIZE = JRubyConf2015::WRITE_SIZE
 
 tps_results = []
 

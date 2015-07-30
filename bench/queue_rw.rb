@@ -16,19 +16,20 @@ Thread.abort_on_exception = true
 ITEMS = 2_000_000
 END_ITEM = "END"
 # PAGE_SIZE = ITEMS * JRubyConf2015::BUFFERS[1].bytesize
-# PAGE_SIZE = JRubyConf2015::WRITE_SIZE
-PAGE_SIZE = 512 * 1024 * 1024
+PAGE_SIZE = JRubyConf2015::WRITE_SIZE
+# PAGE_SIZE = 512 * 1024 * 1024
+CACHE_SIZE = 2
 tps_results = []
 
 puts("=begin")
 
-[[1, 1], [1, 2], [2, 1], [2, 2], [1, 3]].each do |consumers_count, producers_count|
+[[1, 1], [1, 2], [2, 1], [2, 2]].each do |consumers_count, producers_count|
 # [[1, 3]].each do |consumers_count, producers_count|
 
   definitions = [
     {
       :name => "Queue/PageCache",
-      :queue => Mmap::Queue.new(:page_handler => Mmap::PageCache.new(File.join(JRubyConf2015::OUT_PATH, "cached_mapped_queue_benchmark-#{consumers_count}-#{producers_count}"), :page_size => PAGE_SIZE, :cache_size => 4))
+      :queue => Mmap::Queue.new(:page_handler => Mmap::PageCache.new(File.join(JRubyConf2015::OUT_PATH, "cached_mapped_queue_benchmark-#{consumers_count}-#{producers_count}"), :page_size => PAGE_SIZE, :cache_size => CACHE_SIZE))
     },
   ]
 
